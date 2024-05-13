@@ -1,0 +1,121 @@
+{% include 'adminheader.html' %}
+
+<!-- banner -->
+<section class="banner_main">
+   <div class="container-fluid">
+      <div class="row d_flex">
+         <div class="col-md-7">
+            <div class="text-bg">
+               <div class="padding_lert">
+                  <h1>Manage Police</h1>
+                  <form method="post">
+                    {% for row in data['policeupdate'] %}
+                        <table class="table" style="width: 500px">
+                            <tr>
+                                <td>First Name</td>
+                                <td><input type="text" required="" class="form-control" value="{{data['policeupdate'][0]['fname']}}" name="fname"></td>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td><input type="text" required="" class="form-control" value="{{data['policeupdate'][0]['lname']}}"  name="lname"></td>
+                            </tr>
+                            <tr>
+                                <td>Phone</td>
+                                <td><input type="text" required="" class="form-control" value="{{data['policeupdate'][0]['phone']}}" name="phone"></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td><input type="email" required="" class="form-control" value="{{data['policeupdate'][0]['email']}}" name="email"></td>
+                            </tr>
+                            <tr>
+                                <td>Place</td>
+                                <td><input type="text" required="" class="form-control" value="{{data['policeupdate'][0]['place']}}" name="place"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center"><input type="submit" class="btn btn-success" name="update" value="add"></td>
+                            </tr>
+                        </table>
+                    {% endfor %}
+                    {% if not data['policeupdate'] %}
+                        <table class="table" style="width: 500px">
+                            <tr>
+                                <td>First Name</td>
+                                <td><input type="text" required="" class="form-control" name="fname"></td>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td><input type="text" required="" class="form-control" name="lname"></td>
+                            </tr>
+                            <tr>
+                                <td>Phone</td>
+                                <td><input type="text" required="" class="form-control" name="phone"></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td><input type="email" required="" class="form-control" name="email"></td>
+                            </tr>
+                            <tr>
+                                <td>Place</td>
+                                <td><input type="text" required="" class="form-control" name="place"></td>
+                            </tr>
+                            <tr>
+                                <td>Username</td>
+                                <td><input type="text" class="form-control" required  name="username"></td>
+                            </tr>
+                            <tr>
+                                <td>Password</td>
+                                <td><input type="password" class="form-control" required  name="password"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center"><input type="submit" class="btn btn-success" name="submit" value="add"></td>
+                            </tr>
+                        </table>
+                    {% endif %}
+                  </form>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-5 bah">
+            <div class="bann_img">
+               <figure><img src="/static/images/bann_img.png" alt="#"/></figure>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<!-- end banner -->
+
+<!-- Display success message if form submitted -->
+{% if request.method == 'POST' and request.POST.submit %}
+    <div class="alert alert-success" role="alert">
+        Police details added successfully!
+    </div>
+{% endif %}
+
+<br>
+
+<h1>View Police</h1>
+
+<br>
+<table class="table" style="width: 500px">
+    <tr>
+        <th>fname</th>
+        <th>lname</th>
+        <th>phone</th>
+        <th>place</th>
+        <th>Email</th>
+    </tr>
+    {% for row in data['police'] %}
+        <tr>
+            <td>{{ row['fname'] }}</td>
+            <td>{{ row['lname'] }}</td>
+            <td>{{ row['phone'] }}</td>
+            <td>{{ row['place'] }}</td>
+            <td>{{row['email']}}</td>
+            <td><a class="btn btn-success" href="?action=update&pid={{row['police_id']}}">Update</a></td>
+            <td><a class="btn btn-success" href="?action=delete&pid={{row['police_id']}}">Delete</a></td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% include 'footer.html' %}

@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>View Request</title> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Set background color */
+            color: #333; /* Set default text color */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .banner_main {
+            height: 200px;
+            background-color: #007bff; /* Set banner background color */
+            color: #fff; /* Set text color */
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .banner_main h1 {
+            font-size: 36px; /* Increase font size */
+            margin: 0; /* Remove default margin */
+            padding-bottom: 20px; /* Add more padding */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd; /* Add border between rows */
+        }
+
+        th {
+            background-color: #007bff; /* Set table header background color */
+            color: #fff; /* Set table header text color */
+        }
+
+        td a {
+            color: #007bff; /* Set link color */
+            text-decoration: none;
+        }
+
+        td a:hover {
+            text-decoration: underline; /* Add underline on hover */
+        }
+
+        .centered {
+            margin: 0 auto; /* Center horizontally */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Include admin header -->
+{% include 'adminheader.html' %}
+
+<!-- Banner -->
+<section class="banner_main">
+	
+	<h1 style="color: #fff;">File Upload</h1>
+
+</section>
+
+<!-- Content -->
+<div class="container">
+    <div class="centered">
+        <table class="table">
+            <tr>
+                <th>Request</th>
+                <th>Video</th>
+                <th>Out</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            {% for row in data['requestss'] %}
+            <tr>
+                <td>{{ row['request'] }}</td>
+                <td>
+                    <video width="320" height="240" controls>
+                        <source src="{{ row['video_audio'] }}" type="video/mp4">
+                        <source src="movie.ogg" type="video/ogg">
+                    </video>
+                </td>
+                <td>{{ row['out']}}</td>
+                <td>{{ row['status']}}</td>
+                <td><a class="btn btn-success" href="admin_viewlocation?lid={{row['request_id']}}">View Location</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+<!-- Include footer -->
+{% include 'footer.html' %}
+
+</body>
+</html>

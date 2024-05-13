@@ -1,0 +1,52 @@
+{% include 'adminheader.html' %}
+
+
+
+   <!-- banner -->
+	      <section class="banner_main" style="height: 200px">
+	         <div class="container-fluid">
+	            <div class="row d_flex">
+	               <div class="col-md-7">
+	                  <div class="text-bg">
+	                     <div class="padding_lert">
+
+
+
+	                     </div>
+	                  </div>
+	               </div>
+	               <div class="col-md-5 bah">
+	                  <div class="bann_img">
+	                    
+	                  </div>
+	               </div>
+	            </div>
+	         </div>
+	      </section>
+	      <!-- end banner -->
+<br>
+
+<br>
+
+<center>
+<table class="table" style="width: 500px">
+	<tr>
+		<th>Location</th>
+		
+
+	</tr>
+	{% for row in data['location'] %}
+		<tr>
+			
+		
+<td><a class="btn btn-primary" href="http://www.google.com/maps?q={{row['latitude']}},{{row['longitude'] }}">Click Me</a></td>
+		</tr>
+	{% endfor %}
+	
+
+
+
+</table>
+
+</center>
+{% include 'footer.html' %}

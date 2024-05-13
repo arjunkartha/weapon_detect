@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map Section</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    #map-section {
+      padding: 50px 0;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    #dvMap {
+      width: 100%;
+      height: 400px;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<section id="map-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form method="post">
+          <div class="form-group">
+            <label for="lon">Longitude</label>
+            <input type="text" name="lon" class="form-control" id="lon">
+          </div>
+          <div class="form-group">
+            <label for="lat">Latitude</label>
+            <input type="text" name="lat" class="form-control" id="lat">
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-success" onclick="myFunction();"><b>View Map</b></button>
+          </div>
+          <div id="dvMap"></div>
+          <div class="form-group">
+            <input type="submit" name="update" class="btn btn-primary" value="Update">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD3MPnSnyWwNmpnVEFkaddVvy_GWtxSejs&sensor=false"></script>
+<script>
+  function myFunction() {
+    var mapOptions = {
+      center: new google.maps.LatLng(9.9763482, 76.286272),
+      zoom: 14,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var infoWindow = new google.maps.InfoWindow();
+    var latlngbounds = new google.maps.LatLngBounds();
+    var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+    google.maps.event.addListener(map, 'click', function (e) {
+      alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+      document.getElementById('lat').value = e.latLng.lat();
+      document.getElementById('lon').value = e.latLng.lng();
+    });
+  }
+  // Load map when the page loads
+  window.onload = myFunction;
+</script>
+
+</body>
+</html>

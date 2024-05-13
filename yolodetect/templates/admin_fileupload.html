@@ -1,0 +1,55 @@
+{% include 'adminheader.html'%}
+
+<section class="banner_main">
+    <div class="container-fluid">
+        <div class="row d_flex">
+            <div class="col-md-7">
+                <div class="text-bg">
+                    <center>
+                        <h1 style="color: #fff;">File Upload</h1>
+                        <form method="post" enctype="multipart/form-data">
+                            <table class="table" style="width: 500px;color: #fff;">
+                                <tr>
+                                    <td>Video</td>
+                                    <td><input type="file" class="form-control" required accept="video/*" name="video"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center"><input type="submit" class="btn btn-success" name="submit" value="Upload"></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </center>
+                </div>
+            </div>
+            <div class="col-md-5 bah">
+                <div class="bann_img">
+                    <figure><img src="/static/images/bann_img.png" alt="#"/></figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br><br>
+<center>
+    <h1>View File Upload</h1>
+    <table  class="table" style="width: 500px">
+        <tr>
+            <th>Slno</th>
+            <th>Video</th>
+        </tr>
+        {% for row in data['img'] %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    <video width="320" height="240" controls>
+                        <source src="{{ url_for('static', filename=row['images']) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</center>
+
+{% include 'footer.html' %}

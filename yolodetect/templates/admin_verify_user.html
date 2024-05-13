@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureEye</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Set background color */
+            color: #333; /* Set default text color */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .banner_main {
+            height: 200px;
+            background-color: #007bff; /* Set banner background color */
+            color: #fff; /* Set text color */
+            display: flex; /* Use flexbox */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        .banner_main h1 {
+            font-size: 36px; /* Increase font size */
+            margin: 0; /* Remove default margin */
+            color: #fff; /* Set text color to white */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd; /* Add border between rows */
+        }
+
+        th {
+            background-color: #007bff; /* Set table header background color */
+            color: #fff; /* Set table header text color */
+        }
+
+        td a {
+            color: #007bff; /* Set link color */
+            text-decoration: none;
+        }
+
+        td a:hover {
+            text-decoration: underline; /* Add underline on hover */
+        }
+
+        .centered {
+            margin: 0 auto; /* Center horizontally */
+            text-align: center; /* Center align text within the container */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Include admin header -->
+{% include 'adminheader.html' %}
+
+<!-- Banner -->
+<section class="banner_main">
+    <h1>Verify User</h1>
+</section>
+
+<!-- Content -->
+<div class="container">
+    <div class="centered">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Place</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Action</th> <!-- Added action column -->
+            </tr>
+            {% for row in data['view_user'] %}
+            <tr>
+                <td>{{ row['fname'] }}  {{ row['lname'] }}</td>
+                <td>{{ row['place']}}</td>
+                <td>{{ row['phone']}}</td>
+                <td>{{ row['email']}}</td>
+                {%  if row['usertype']=='pending' %}
+                <td><a href="?action=accept&jj={{row['login_id']}}">Accept</a> | <a href="?action=reject&jj={{row['login_id']}}">Reject</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+<!-- Include footer -->
+{% include 'footer.html' %}
+
+</body>
+</html>

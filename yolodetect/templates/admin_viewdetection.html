@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Detection</title>
+  <style>
+    /* Additional CSS styles for the redesigned layout */
+    
+    body, html {
+      margin: 0;
+      padding: 0;
+    }
+    
+    #hero {
+      position: relative;
+      background-color: #0f1010;
+      padding: 100px 0; /* Increased padding for better spacing */
+      font-family: Arial, sans-serif;
+      background-image: url("D:\yolodetect\static\images\banner.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-top: 60px; /* Ensure space for the navbar */
+      margin-top: -10px; /* Add negative margin to counteract margin collapsing */
+    }
+    
+    .hero-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    .detection-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-family: Arial, sans-serif;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid #ddd; /* Change border color for better contrast */
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    
+    .detection-table th,
+    .detection-table td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 20px solid #f2eeee; /* Change border color for better contrast */
+    }
+    
+    .detection-table .header-row {
+      background-color: #f2f2f2; /* Light gray background for header row */
+      color: black;
+    }
+    
+    .detection-table img {
+      max-width: 50%;
+      height: auto;
+    }
+    
+    .detection-table td:first-child {
+      padding: 0;
+    }
+    
+    .detection-table td:first-child a {
+      display: block;
+      padding: 10px;
+    }
+    /* Style for the button-like link */
+    .button-link {
+  display: inline-block;
+  padding: 8px 16px; /* Decreased padding */
+  background-color: #4CAF50; /* Green */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Add smooth transition effect */
+  font-size: 14px; /* Decreased font size */
+}
+
+
+/* Hover effect */
+.button-link:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+    
+    /* Adjust title position */
+    #hero h1 {
+      position: relative;
+      z-index: 1;
+      color: white;
+      margin-top: 0; /* Ensure no top margin for the title */
+    }
+  </style>
+</head>
+<body>
+  {% include 'adminheader.html' %}
+  <div id="hero">
+    <div class="hero-container">
+      <div data-aos="fade-in">
+        <center>
+          <h1>VIEW DETECTION</h1>
+        </center>
+  
+        <table class="detection-table">
+          <thead>
+            <tr class="header-row">
+              <th>Detected Frame</th>
+              <th>Detection</th>
+              <th>Date</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in data['view'] %}
+            <tr>
+              <td><a href="static/detect/{{ item['frame'] }}"><img src="/{{ item['frame'] }}" alt="Detection Image"></a></td>
+              <!-- <td>{{ item.details }}</td>
+              <td>{{ item.date }}</td> -->
+              <td style="color: black;">{{ item.details }}</td>
+<td style="color: black;">{{ item.date }}</td>
+<td><a class="button-link" href="updateloc?did={{item.detect_id}}">Update Location</a></td>
+
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% include 'footer.html' %}
+</body>
+</html>
